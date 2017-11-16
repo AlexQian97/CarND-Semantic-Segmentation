@@ -39,7 +39,7 @@ def load_vgg(sess, vgg_path):
     layer3 = tf.get_default_graph().get_tensor_by_name(vgg_layer3_out_tensor_name)
     layer4 = tf.get_default_graph().get_tensor_by_name(vgg_layer4_out_tensor_name)
     layer7 = tf.get_default_graph().get_tensor_by_name(vgg_layer7_out_tensor_name)
-    
+
     return image_input, keep_prob, layer3, layer4, layer7
 
 
@@ -89,7 +89,7 @@ def layers(vgg_layer3_out, vgg_layer4_out, vgg_layer7_out, num_classes):
     # skip connection
     upsample_layer3_input = tf.add(upsample_layer2, layer3_out)
     # upsample
-    upsample_layer3 = tf.layers.conv2d_transpose(upsample_layer3_input, num_classes, 4, strides=(2, 2), padding='same',
+    upsample_layer3 = tf.layers.conv2d_transpose(upsample_layer3_input, num_classes, 16, strides=(8, 8), padding='same',
                                                  kernel_initializer=tf.random_normal_initializer(stddev=0.01),
                                                  kernel_regularizer=tf.contrib.layers.l2_regularizer(1e-3))
 
